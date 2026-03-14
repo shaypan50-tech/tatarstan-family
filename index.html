@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>TATARSTAN FAMILY · RMRP</title>
+    <!-- Favicon -->
+    <link rel="icon" href="ico.png" type="image/png">
+    <!-- Шрифты и иконки -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <style>
+        /* Глобальные переменные и сброс */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #030305;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 1px, transparent 1px, transparent 12px);
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: clamp(15px, 4vw, 30px) 16px 0;
+        }
+
+        /* ===== DYNAMIC ISLAND ===== */
+        .dynamic-island {
+            max-width: min(1000px, 90vw);
+            width: 100%;
+            background: rgba(8, 10, 15, 0.7);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            padding: clamp(6px, 2vw, 8px) clamp(12px, 3vw, 20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 30px 50px -20px black, 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+            transition: box-shadow 0.3s ease, border-color 0.2s;
+            z-index: 10;
+        }
+
+        .dynamic-island:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 35px 55px -20px #000, 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        }
+
+        /* Логотип */
+        .logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 1;
+            min-width: 0;
+        }
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .logo a:hover {
+            opacity: 0.8;
+        }
+        .logo img {
+            height: clamp(28px, 6vw, 34px);
+            width: auto;
+            max-width: min(170px, 30vw);
+            object-fit: contain;
+            border-radius: 12px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+        }
+
+        /* Центральное меню */
+        .nav-links {
+            display: flex;
+            gap: clamp(4px, 1.5vw, 6px);
+            align-items: center;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 4px;
+            border-radius: 70px;
+            backdrop-filter: blur(8px);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            position: relative;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-weight: 500;
+            cursor: pointer;
+            padding: clamp(5px, 2vw, 8px) clamp(10px, 3vw, 16px);
+            border-radius: 60px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.25s, color 0.25s, transform 0.15s, padding 0.2s;
+            white-space: nowrap;
+            border: 1px solid transparent;
+            letter-spacing: 0.2px;
+            line-height: 1.2;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .btn-text {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .short-text,
+        .full-text {
+            white-space: nowrap;
+            transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.25s ease,
+                        padding 0.2s ease;
+        }
+
+        .short-text {
+            opacity: 1;
+            max-width: 60px;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .full-text {
+            opacity: 0;
+            max-width: 0;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .nav-btn:hover .short-text {
+            opacity: 0;
+            max-width: 0;
+            padding-right: 0;
+        }
+
+        .nav-btn:hover .full-text {
+            opacity: 1;
+            max-width: 200px;
+            padding-left: 4px;
+        }
+
+        .nav-btn.regular {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .nav-btn.regular:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .nav-btn.regular .btn-text {
+            display: inline-block;
+        }
+
+        /* Кнопка Discord */
+        .discord-btn {
+            background: #5865F2;
+            border: none;
+            border-radius: 60px;
+            padding: clamp(8px, 2vw, 10px) clamp(16px, 4vw, 26px);
+            color: white;
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: clamp(6px, 1.5vw, 10px);
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+            box-shadow: 0 8px 18px rgba(88, 101, 242, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+        }
+
+        .discord-btn i {
+            font-size: clamp(18px, 4vw, 22px);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .discord-btn:hover {
+            background-color: #4752c4;
+            transform: scale(1.02) translateY(-1px);
+            box-shadow: 0 14px 24px -6px #5865F2;
+        }
+
+        /* ===== СТРАНИЦЫ ===== */
+        .page {
+            width: 100%;
+            max-width: min(1000px, 90vw);
+            flex: 1;
+            display: none;
+            flex-direction: column;
+            padding: clamp(20px, 5vh, 40px) 0 40px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        #page-home {
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== ГЛАВНАЯ (hero) ===== */
+        .hero-content {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(36px, 10vw, 72px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #b8b8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.3em;
+            text-shadow: 0 4px 30px rgba(88, 101, 242, 0.4);
+            word-break: break-word;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 5vw, 28px);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1.5em;
+            letter-spacing: 0.3px;
+            border-left: 4px solid #5865F2;
+            padding-left: clamp(16px, 4vw, 24px);
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #5865F2, #3f4ad6);
+            color: white;
+            font-size: clamp(18px, 4vw, 22px);
+            font-weight: 600;
+            padding: clamp(14px, 3vw, 18px) clamp(32px, 8vw, 52px);
+            border-radius: 80px;
+            text-decoration: none;
+            box-shadow: 0 25px 40px -12px #5865F2;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.5px;
+            gap: clamp(8px, 2vw, 12px);
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+
+        .hero-button i {
+            font-size: 1.2em;
+            transition: transform 0.2s;
+        }
+
+        .hero-button:hover {
+            background: linear-gradient(145deg, #4752c4, #353fad);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 32px 48px -10px #5865F2;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-button:hover i {
+            transform: translateX(6px);
+        }
+
+        /* ===== ОБЩИЙ СТИЛЬ ДЛЯ СТРАНИЦ С ПРАВИЛАМИ ===== */
+        .rules-container {
+            background: rgba(15, 17, 22, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: clamp(24px, 5vw, 32px);
+            padding: clamp(20px, 5vw, 40px);
+            box-shadow: 0 30px 40px -20px black;
+            width: 100%;
+        }
+
+        .rules-header {
+            text-align: center;
+            margin-bottom: clamp(20px, 5vh, 40px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: clamp(15px, 4vh, 30px);
+        }
+
+        .rules-title {
+            font-size: clamp(32px, 8vw, 48px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            word-break: break-word;
+        }
+
+        .rules-subtitle {
+            font-size: clamp(18px, 4vw, 24px);
+            font-weight: 400;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+        }
+
+        .rules-content {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(15px, 3.5vw, 18px);
+            line-height: 1.6;
+        }
+
+        /* Нумерованный список для устава */
+        .rules-content ol {
+            list-style: none;
+            counter-reset: item;
+            padding-left: 0;
+        }
+        .rules-content li {
+            counter-increment: item;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            word-break: break-word;
+        }
+        .rules-content li::before {
+            content: counter(item) ".";
+            position: absolute;
+            left: 0;
+            color: #5865F2;
+            font-weight: 600;
+        }
+        .rules-content li ol {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            counter-reset: subitem;
+            padding-left: 20px;
+        }
+        .rules-content li ol li {
+            counter-increment: subitem;
+            padding-left: 30px;
+        }
+        .rules-content li ol li::before {
+            content: counter(item) "." counter(subitem) ".";
+            color: #8a9cff;
+        }
+
+        /* Список для системы повышений — точка слева с отступом */
+        .promo-list {
+            list-style: none;
+            padding: 0;
+        }
+        .promo-list li {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .promo-list li::before {
+            content: "•";
+            color: #5865F2;
+            font-weight: bold;
+            font-size: 1.6em;
+            line-height: 1;
+            margin-right: 15px;        /* чёткий отступ точки от текста */
+            align-self: flex-start;
+        }
+        .promo-list li strong {
+            color: #8a9cff;
+            font-weight: 600;
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+        .promo-list li span {
+            flex: 1;
+            color: rgba(255,255,255,0.9);
+        }
+        @media (max-width: 500px) {
+            .promo-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .promo-list li::before {
+                margin-right: 0;
+                margin-bottom: 5px;    /* на мобильных точка отделена от текста снизу */
+            }
+            .promo-list li strong {
+                min-width: auto;
+            }
+        }
+
+        .rules-note {
+            margin-top: 40px;
+            padding: clamp(15px, 4vw, 20px) clamp(20px, 5vw, 30px);
+            background: rgba(88,101,242,0.1);
+            border-radius: 20px;
+            border-left: 4px solid #5865F2;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95em;
+        }
+
+        .back-link {
+            margin-top: 30px;
+            text-align: right;
+        }
+        .back-link a {
+            color: #5865F2;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: clamp(14px, 3.5vw, 16px);
+        }
+        .back-link a:hover {
+            opacity: 0.7;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .site-footer {
+            width: 100%;
+            max-width: min(1000px, 90vw);
+            padding: 20px 0 30px;
+            text-align: right;
+            color: rgba(255, 255, 255, 0.18);
+            font-size: clamp(11px, 3vw, 13px);
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+        .site-footer span {
+            background: rgba(255,255,255,0.02);
+            padding: 4px 12px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        /* ===== ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ ===== */
+        .glow-1 {
+            position: fixed;
+            width: min(400px, 50vw);
+            height: min(400px, 50vw);
+            background: rgba(88, 101, 242, 0.03);
+            border-radius: 50%;
+            filter: blur(120px);
+            bottom: -100px;
+            right: -100px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glow-2 {
+            position: fixed;
+            width: min(500px, 60vw);
+            height: min(500px, 60vw);
+            background: rgba(20, 30, 70, 0.05);
+            border-radius: 50%;
+            filter: blur(140px);
+            top: -200px;
+            left: -100px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ===== ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ДЛЯ ЭКСТРЕМАЛЬНЫХ РАЗМЕРОВ ===== */
+        @media (min-width: 1400px) {
+            .dynamic-island,
+            .page,
+            .site-footer {
+                max-width: 1200px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-btn {
+                padding: 4px 8px;
+                font-size: 12px;
+            }
+            .discord-btn span {
+                display: none;
+            }
+            .discord-btn {
+                padding: 8px 12px;
+            }
+            .hero-button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+
+        @media (min-height: 800px) {
+            #page-home {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <!-- Dynamic Island -->
+    <div class="dynamic-island">
+        <div class="logo" id="logo-home">
+            <a href="#/" title="На главную">
+                <img src="icon.png" alt="TATARSTAN FAMILY" onerror="this.src='https://via.placeholder.com/34x34/18181b/aaaaaa?text=TF';">
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="#/fc" class="nav-btn" id="btn-charter">
+                <span class="btn-text">
+                    <span class="short-text">С/У</span>
+                    <span class="full-text">Семейный Устав</span>
+                </span>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk07YXrruc-KZCXk7lFtBd8umLcR_NowE0db_HzxTtKp6mQg/viewform?usp=publish-editor" 
+               class="nav-btn regular" target="_blank" rel="noopener noreferrer">
+                <span class="btn-text">Заявка</span>
+            </a>
+            <a href="#/ps" class="nav-btn" id="btn-promotion">
+                <span class="btn-text">
+                    <span class="short-text">С/П</span>
+                    <span class="full-text">Система Повышений</span>
+                </span>
+            </a>
+        </div>
+        <!-- Актуальная ссылка на Discord -->
+        <a href="https://discord.gg/qjHRYMbHnk" class="discord-btn" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-discord"></i>
+            <span>discord</span>
+        </a>
+    </div>
+
+    <!-- Страница: Главная (/) -->
+    <div id="page-home" class="page active">
+        <div class="hero-content">
+            <h1 class="hero-title">TATARSTAN FAMILY<br>— Лучшая фама на RMRP!</h1>
+            <div class="hero-subtitle">Сервер RMRP АРБАТ.</div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk07YXrruc-KZCXk7lFtBd8umLcR_NowE0db_HzxTtKp6mQg/viewform?usp=publish-editor" 
+               class="hero-button" target="_blank" rel="noopener noreferrer">
+                <span>Заявка</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Страница: Семейный Устав (/fc) -->
+    <div id="page-charter" class="page">
+        <div class="rules-container">
+            <div class="rules-header">
+                <div style="font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">УТВЕРЖДЕН</div>
+                <div style="font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.4); margin-bottom: 5px;">решением общего собрания семьи "TATARSTAN"</div>
+                <div style="font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.4); margin-bottom: 20px;">Протокол № 1 от 28.02.2026г.</div>
+                <h1 class="rules-title">УСТАВ</h1>
+                <div class="rules-subtitle">Общества с полной ответственностью "TATARSTAN"</div>
+                <div style="font-size: clamp(14px, 3.5vw, 16px); color: rgba(255,255,255,0.3);">Г. Москва · 2026 год</div>
+            </div>
+            <div class="rules-content">
+                <ol>
+                    <li>разглашение личной информации (имена, места работы, местоположение и т.д., так-же оос информации) участников, а так-же чатов посторонним лицам, без ведома руководства — <span style="color:#ffaa70;">[выговор / исключение]</span></li>
+                    <li>оскорбления участников — <span style="color:#ffaa70;">[предупреждение / выговор]</span>
+                        <ol>
+                            <li>многократные оскорбления в адрес членов семьи — <span style="color:#ffaa70;">[исключение с чата фамы / тг]</span>, повторные действия — исключение</li>
+                        </ol>
+                    </li>
+                    <li>спам / капс в чат — <span style="color:#ffaa70;">[предупреждение]</span></li>
+                    <li>помеха участникам:
+                        <ol>
+                            <li>умышленный наезд — <span style="color:#ffaa70;">[предупреждение / далее выговор]</span></li>
+                            <li>помеха игроком — <span style="color:#ffaa70;">[предупреждение / далее выговор]</span></li>
+                            <li>помеха чатом — <span style="color:#ffaa70;">[предупреждение / далее выговор]</span></li>
+                        </ol>
+                    </li>
+                    <li>убийство участника — <span style="color:#ffaa70;">[выговор / исключение]</span>
+                        <ol>
+                            <li>убийство стороннего игрока без причины (dm) — <span style="color:#ffaa70;">[предупреждение / далее выговор]</span></li>
+                        </ol>
+                    </li>
+                    <li>провокация сторонних игроков на оскорбления/стрельбу — <span style="color:#ffaa70;">[предупреждение / выговор]</span></li>
+                    <li>если игрок получил warn, ban являясь участником основного состава — <span style="color:#ffaa70;">[вынесение наказания согласовывается советом путём голосования]</span></li>
+                    <li>если игрок получил warn, ban не являясь участником основного состава — <span style="color:#ffaa70;">[на усмотрение лидера]</span></li>
+                    <li>использование вредоносных программ:
+                        <ol>
+                            <li>с целью получения преимущества над игроками сервера (прим. wallhack, speedhack) — <span style="color:#ffaa70;">[предупреждение]</span></li>
+                            <li>с целью нанесения вреда игрокам сервера (прим. aim, rapid fire) — <span style="color:#ffaa70;">[выговор / исключение]</span></li>
+                        </ol>
+                    </li>
+                    <li>обман/клевета участников — <span style="color:#ffaa70;">[2 выговора]</span></li>
+                    <li>намеренное разжигание конфликта — <span style="color:#ffaa70;">[предупреждение / выговор]</span></li>
+                    <li>помощь участникам «latarstan» если имеется возможность, так же:
+                        <ol>
+                            <li>для игроков состоящих во фракциях: если действия организации в которой вы состоите направлены на нанесение вреда в любом виде участнику семьи «latarstan» вы не должны содействовать, либо-же предупредить участника семьи в рационе.</li>
+                        </ol>
+                    </li>
+                    <li>с и оос конфликты с игроками/фракциями, повлекшие за собой негативное отношение к семье — <span style="color:#ffaa70;">[выговор / исключение]</span></li>
+                </ol>
+                <div class="rules-note">
+                    <i class="fas fa-gavel" style="margin-right: 10px;"></i> Наказания применяются согласно степени тяжести нарушения и решения совета.
+                </div>
+            </div>
+            <div class="back-link">
+                <a href="#/"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Страница: Система Повышений (/ps) — точка теперь чётко отделена от текста -->
+    <div id="page-promotion" class="page">
+        <div class="rules-container">
+            <div class="rules-header">
+                <h1 class="rules-title">СИСТЕМА ПОВЫШЕНИЙ</h1>
+                <div class="rules-subtitle">TATARSTAN FAMILY</div>
+            </div>
+            <div class="rules-content">
+                <ul class="promo-list">
+                    <li><strong>Малай → Пацан</strong> <span>ﾠСдать семейный устав Лидеру либо Гл. Заместителям, раскидать 5 раскладок</span></li>
+                    <li><strong>Пацан → Буре</strong> <span>раскидать 10 раскладок. Положить в семейный «общак» : 20.000₽</span></li>
+                    <li><strong>Буре → Торпеда</strong> <span>ﾠраскидать 20 раскладок. Присутствовать на одном ограблении. Положить в семейный «общак» : 30.000₽</span></li>
+                    <li><strong>Торпеда → Свояк</strong> <span>ﾠраскидать 30 раскладок. Быть на 5 ограблениях. Положить в семейный «общак» : 50.000₽</span></li>
+                    <li><strong>Свояк → Татарин</strong> <span>ﾠПрисутствовать на 10 ограблениях. Положить в семейный «общак» : 100.000₽</span></li>
+                    <li><strong>Татарин → Абый</strong> <span>ﾠНа усмотрение Лидера</span></li>
+                </ul>
+                <div class="rules-note">
+                    <i class="fas fa-arrow-up" style="margin-right: 10px;"></i> Повышение ступени возможно только после выполнения всех условий текущей.
+                </div>
+            </div>
+            <div class="back-link">
+                <a href="#/"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="site-footer">
+        <span>© 2026 TATARSTAN FAMILY · без cookies</span>
+    </footer>
+
+    <script>
+        // Роутинг на основе хэша
+        const homePage = document.getElementById('page-home');
+        const charterPage = document.getElementById('page-charter');
+        const promoPage = document.getElementById('page-promotion');
+
+        function showPageFromHash() {
+            const hash = window.location.hash.substring(1) || '/';
+            if (hash === '/') {
+                homePage.classList.add('active');
+                charterPage.classList.remove('active');
+                promoPage.classList.remove('active');
+            } else if (hash === '/fc') {
+                charterPage.classList.add('active');
+                homePage.classList.remove('active');
+                promoPage.classList.remove('active');
+            } else if (hash === '/ps') {
+                promoPage.classList.add('active');
+                homePage.classList.remove('active');
+                charterPage.classList.remove('active');
+            } else {
+                window.location.hash = '#/';
+            }
+        }
+
+        window.addEventListener('hashchange', showPageFromHash);
+        window.addEventListener('load', () => {
+            if (!window.location.hash || !['#/', '#/fc', '#/ps'].includes(window.location.hash)) {
+                window.location.hash = '#/';
+            } else {
+                showPageFromHash();
+            }
+        });
+    </script>
+</body>
+</html>
