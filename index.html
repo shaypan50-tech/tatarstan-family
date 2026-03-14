@@ -53,6 +53,7 @@
             box-shadow: 0 30px 50px -20px black, 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
             transition: box-shadow 0.3s ease, border-color 0.2s;
             z-index: 10;
+            position: relative; /* для мобильного меню */
         }
 
         .dynamic-island:hover {
@@ -66,6 +67,7 @@
             align-items: center;
             flex-shrink: 1;
             min-width: 0;
+            cursor: pointer;
         }
         .logo a {
             display: flex;
@@ -85,7 +87,7 @@
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
         }
 
-        /* Центральное меню */
+        /* Центральное меню (десктоп) */
         .nav-links {
             display: flex;
             gap: clamp(4px, 1.5vw, 6px);
@@ -176,7 +178,7 @@
             display: inline-block;
         }
 
-        /* Кнопка Discord */
+        /* Кнопка Discord (десктоп) */
         .discord-btn {
             background: #5865F2;
             border: none;
@@ -207,6 +209,64 @@
             background-color: #4752c4;
             transform: scale(1.02) translateY(-1px);
             box-shadow: 0 14px 24px -6px #5865F2;
+        }
+
+        /* Бургер-меню (скрыто на десктопе) */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0 10px;
+            line-height: 1;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: rgba(15, 17, 22, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 16px;
+            min-width: 220px;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 20px 30px -10px black;
+            z-index: 100;
+        }
+
+        .mobile-menu.show {
+            display: flex;
+        }
+
+        .mobile-menu .nav-btn {
+            width: 100%;
+            justify-content: flex-start;
+            padding: 12px 16px;
+            font-size: 16px;
+        }
+
+        .mobile-menu .discord-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 12px 16px;
+            margin-top: 8px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 720px) {
+            .nav-links, .discord-btn {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
         }
 
         /* ===== СТРАНИЦЫ ===== */
@@ -380,7 +440,7 @@
             color: #8a9cff;
         }
 
-        /* Список для системы повышений — точка слева с отступом */
+        /* Список для системы повышений */
         .promo-list {
             list-style: none;
             padding: 0;
@@ -398,7 +458,7 @@
             font-weight: bold;
             font-size: 1.6em;
             line-height: 1;
-            margin-right: 15px;        /* чёткий отступ точки от текста */
+            margin-right: 15px;
             align-self: flex-start;
         }
         .promo-list li strong {
@@ -418,7 +478,7 @@
             }
             .promo-list li::before {
                 margin-right: 0;
-                margin-bottom: 5px;    /* на мобильных точка отделена от текста снизу */
+                margin-bottom: 5px;
             }
             .promo-list li strong {
                 min-width: auto;
@@ -499,7 +559,7 @@
             pointer-events: none;
         }
 
-        /* ===== ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ДЛЯ ЭКСТРЕМАЛЬНЫХ РАЗМЕРОВ ===== */
+        /* Дополнительно */
         @media (min-width: 1400px) {
             .dynamic-island,
             .page,
@@ -543,6 +603,7 @@
                 <img src="icon.png" alt="TATARSTAN FAMILY" onerror="this.src='https://via.placeholder.com/34x34/18181b/aaaaaa?text=TF';">
             </a>
         </div>
+        <!-- Десктопное меню -->
         <div class="nav-links">
             <a href="#/fc" class="nav-btn" id="btn-charter">
                 <span class="btn-text">
@@ -561,11 +622,39 @@
                 </span>
             </a>
         </div>
-        <!-- Актуальная ссылка на Discord -->
         <a href="https://discord.gg/qjHRYMbHnk" class="discord-btn" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord"></i>
             <span>discord</span>
         </a>
+
+        <!-- Бургер-кнопка для мобильных -->
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Мобильное выпадающее меню (с Discord) -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#/fc" class="nav-btn" id="mobile-btn-charter">
+                <span class="btn-text">
+                    <span class="short-text">С/У</span>
+                    <span class="full-text">Семейный Устав</span>
+                </span>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk07YXrruc-KZCXk7lFtBd8umLcR_NowE0db_HzxTtKp6mQg/viewform?usp=publish-editor" 
+               class="nav-btn regular" target="_blank" rel="noopener noreferrer">
+                <span class="btn-text">Заявка</span>
+            </a>
+            <a href="#/ps" class="nav-btn" id="mobile-btn-promotion">
+                <span class="btn-text">
+                    <span class="short-text">С/П</span>
+                    <span class="full-text">Система Повышений</span>
+                </span>
+            </a>
+            <a href="https://discord.gg/qjHRYMbHnk" class="discord-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i>
+                <span>discord</span>
+            </a>
+        </div>
     </div>
 
     <!-- Страница: Главная (/) -->
@@ -641,7 +730,7 @@
         </div>
     </div>
 
-    <!-- Страница: Система Повышений (/ps) — точка теперь чётко отделена от текста -->
+    <!-- Страница: Система Повышений (/ps) -->
     <div id="page-promotion" class="page">
         <div class="rules-container">
             <div class="rules-header">
@@ -704,6 +793,31 @@
             } else {
                 showPageFromHash();
             }
+        });
+
+        // Мобильное меню
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('show');
+            }
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('show');
+            });
+        });
+
+        document.querySelector('.logo').addEventListener('click', () => {
+            mobileMenu.classList.remove('show');
         });
     </script>
 </body>
