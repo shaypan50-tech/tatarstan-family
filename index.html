@@ -15,7 +15,6 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <style>
-        /* Глобальные переменные и сброс */
         * {
             margin: 0;
             padding: 0;
@@ -53,7 +52,6 @@
             box-shadow: 0 30px 50px -20px black, 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
             transition: box-shadow 0.3s ease, border-color 0.2s;
             z-index: 10;
-            position: relative; /* для мобильного меню */
         }
 
         .dynamic-island:hover {
@@ -61,7 +59,6 @@
             box-shadow: 0 35px 55px -20px #000, 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
         }
 
-        /* Логотип */
         .logo {
             display: flex;
             align-items: center;
@@ -87,7 +84,6 @@
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
         }
 
-        /* Центральное меню (десктоп) */
         .nav-links {
             display: flex;
             gap: clamp(4px, 1.5vw, 6px);
@@ -98,6 +94,13 @@
             backdrop-filter: blur(8px);
             flex-wrap: wrap;
             justify-content: center;
+        }
+
+        .separator {
+            width: 1px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 4px;
         }
 
         .nav-btn {
@@ -178,7 +181,6 @@
             display: inline-block;
         }
 
-        /* Кнопка Discord (десктоп) */
         .discord-btn {
             background: #5865F2;
             border: none;
@@ -211,7 +213,6 @@
             box-shadow: 0 14px 24px -6px #5865F2;
         }
 
-        /* Бургер-меню (скрыто на десктопе) */
         .menu-toggle {
             display: none;
             background: transparent;
@@ -259,7 +260,12 @@
             margin-top: 8px;
         }
 
-        /* Адаптивность */
+        .mobile-menu .separator {
+            width: 100%;
+            height: 1px;
+            margin: 8px 0;
+        }
+
         @media (max-width: 720px) {
             .nav-links, .discord-btn {
                 display: none;
@@ -405,7 +411,6 @@
             line-height: 1.6;
         }
 
-        /* Нумерованный список для устава */
         .rules-content ol {
             list-style: none;
             counter-reset: item;
@@ -440,7 +445,6 @@
             color: #8a9cff;
         }
 
-        /* Список для системы повышений */
         .promo-list {
             list-style: none;
             padding: 0;
@@ -514,6 +518,17 @@
             opacity: 0.7;
         }
 
+        /* ===== СТРАНИЦА ДРЕСС-КОДА (пустая) ===== */
+        .placeholder-content {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 40px;
+            color: rgba(255,255,255,0.3);
+            font-size: 24px;
+            border: 1px dashed rgba(255,255,255,0.1);
+        }
+
         /* ===== ФУТЕР ===== */
         .site-footer {
             width: 100%;
@@ -533,7 +548,6 @@
             display: inline-block;
         }
 
-        /* ===== ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ ===== */
         .glow-1 {
             position: fixed;
             width: min(400px, 50vw);
@@ -559,7 +573,6 @@
             pointer-events: none;
         }
 
-        /* Дополнительно */
         @media (min-width: 1400px) {
             .dynamic-island,
             .page,
@@ -603,7 +616,6 @@
                 <img src="icon.png" alt="TATARSTAN FAMILY" onerror="this.src='https://via.placeholder.com/34x34/18181b/aaaaaa?text=TF';">
             </a>
         </div>
-        <!-- Десктопное меню -->
         <div class="nav-links">
             <a href="#/fc" class="nav-btn" id="btn-charter">
                 <span class="btn-text">
@@ -621,18 +633,23 @@
                     <span class="full-text">Система Повышений</span>
                 </span>
             </a>
+            <div class="separator"></div>
+            <a href="#/dc" class="nav-btn" id="btn-dresscode">
+                <span class="btn-text">
+                    <span class="short-text">Д/К</span>
+                    <span class="full-text">Дресс Код</span>
+                </span>
+            </a>
         </div>
         <a href="https://discord.gg/qjHRYMbHnk" class="discord-btn" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord"></i>
             <span>discord</span>
         </a>
 
-        <!-- Бургер-кнопка для мобильных -->
         <button class="menu-toggle" id="menuToggle">
             <i class="fas fa-bars"></i>
         </button>
 
-        <!-- Мобильное выпадающее меню (с Discord) -->
         <div class="mobile-menu" id="mobileMenu">
             <a href="#/fc" class="nav-btn" id="mobile-btn-charter">
                 <span class="btn-text">
@@ -648,6 +665,13 @@
                 <span class="btn-text">
                     <span class="short-text">С/П</span>
                     <span class="full-text">Система Повышений</span>
+                </span>
+            </a>
+            <div class="separator"></div>
+            <a href="#/dc" class="nav-btn" id="mobile-btn-dresscode">
+                <span class="btn-text">
+                    <span class="short-text">Д/К</span>
+                    <span class="full-text">Дресс Код</span>
                 </span>
             </a>
             <a href="https://discord.gg/qjHRYMbHnk" class="discord-btn" target="_blank" rel="noopener noreferrer">
@@ -739,12 +763,12 @@
             </div>
             <div class="rules-content">
                 <ul class="promo-list">
-                    <li><strong>Малай → Пацан</strong> <span>ﾠСдать семейный устав Лидеру либо Гл. Заместителям, раскидать 5 раскладок</span></li>
+                    <li><strong>Малай → Пацан</strong> <span>Сдать семейный устав Лидеру либо Гл. Заместителям, раскидать 5 раскладок</span></li>
                     <li><strong>Пацан → Буре</strong> <span>раскидать 10 раскладок. Положить в семейный «общак» : 20.000₽</span></li>
-                    <li><strong>Буре → Торпеда</strong> <span>ﾠраскидать 20 раскладок. Присутствовать на одном ограблении. Положить в семейный «общак» : 30.000₽</span></li>
-                    <li><strong>Торпеда → Свояк</strong> <span>ﾠраскидать 30 раскладок. Быть на 5 ограблениях. Положить в семейный «общак» : 50.000₽</span></li>
-                    <li><strong>Свояк → Татарин</strong> <span>ﾠПрисутствовать на 10 ограблениях. Положить в семейный «общак» : 100.000₽</span></li>
-                    <li><strong>Татарин → Абый</strong> <span>ﾠНа усмотрение Лидера</span></li>
+                    <li><strong>Буре → Торпеда</strong> <span>раскидать 20 раскладок. Присутствовать на одном ограблении. Положить в семейный «общак» : 30.000₽</span></li>
+                    <li><strong>Торпеда → Свояк</strong> <span>раскидать 30 раскладок. Быть на 5 ограблениях. Положить в семейный «общак» : 50.000₽</span></li>
+                    <li><strong>Свояк → Татарин</strong> <span>Присутствовать на 10 ограблениях. Положить в семейный «общак» : 100.000₽</span></li>
+                    <li><strong>Татарин → Абый</strong> <span>На усмотрение Лидера</span></li>
                 </ul>
                 <div class="rules-note">
                     <i class="fas fa-arrow-up" style="margin-right: 10px;"></i> Повышение ступени возможно только после выполнения всех условий текущей.
@@ -753,6 +777,18 @@
             <div class="back-link">
                 <a href="#/"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
             </div>
+        </div>
+    </div>
+
+    <!-- Страница: Дресс Код (/dc) - пустая -->
+    <div id="page-dresscode" class="page">
+        <div class="placeholder-content">
+            <i class="fas fa-tshirt" style="font-size: 60px; margin-bottom: 20px; opacity: 0.3;"></i>
+            <p>Дресс Код</p>
+            <p style="font-size: 16px; margin-top: 10px;">будет добавлен позже</p>
+        </div>
+        <div class="back-link" style="margin-top: 20px; text-align: center;">
+            <a href="#/"><i class="fas fa-arrow-left"></i> На главную</a>
         </div>
     </div>
 
@@ -766,6 +802,7 @@
         const homePage = document.getElementById('page-home');
         const charterPage = document.getElementById('page-charter');
         const promoPage = document.getElementById('page-promotion');
+        const dresscodePage = document.getElementById('page-dresscode');
 
         function showPageFromHash() {
             const hash = window.location.hash.substring(1) || '/';
@@ -773,14 +810,22 @@
                 homePage.classList.add('active');
                 charterPage.classList.remove('active');
                 promoPage.classList.remove('active');
+                dresscodePage.classList.remove('active');
             } else if (hash === '/fc') {
                 charterPage.classList.add('active');
                 homePage.classList.remove('active');
                 promoPage.classList.remove('active');
+                dresscodePage.classList.remove('active');
             } else if (hash === '/ps') {
                 promoPage.classList.add('active');
                 homePage.classList.remove('active');
                 charterPage.classList.remove('active');
+                dresscodePage.classList.remove('active');
+            } else if (hash === '/dc') {
+                dresscodePage.classList.add('active');
+                homePage.classList.remove('active');
+                charterPage.classList.remove('active');
+                promoPage.classList.remove('active');
             } else {
                 window.location.hash = '#/';
             }
@@ -788,7 +833,7 @@
 
         window.addEventListener('hashchange', showPageFromHash);
         window.addEventListener('load', () => {
-            if (!window.location.hash || !['#/', '#/fc', '#/ps'].includes(window.location.hash)) {
+            if (!window.location.hash || !['#/', '#/fc', '#/ps', '#/dc'].includes(window.location.hash)) {
                 window.location.hash = '#/';
             } else {
                 showPageFromHash();
