@@ -518,15 +518,90 @@
             opacity: 0.7;
         }
 
-        /* ===== СТРАНИЦА ДРЕСС-КОДА (пустая) ===== */
-        .placeholder-content {
+        /* ===== СТРАНИЦА ДРЕСС-КОДА ===== */
+        .dresscode-container {
+            background: rgba(15, 17, 22, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: clamp(24px, 5vw, 32px);
+            padding: clamp(20px, 5vw, 40px);
+            box-shadow: 0 30px 40px -20px black;
+            width: 100%;
+        }
+
+        .dresscode-header {
             text-align: center;
-            padding: 80px 20px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 40px;
-            color: rgba(255,255,255,0.3);
-            font-size: 24px;
-            border: 1px dashed rgba(255,255,255,0.1);
+            margin-bottom: clamp(20px, 5vh, 40px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: clamp(15px, 4vh, 30px);
+        }
+
+        .dresscode-title {
+            font-size: clamp(32px, 8vw, 48px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a0a0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            word-break: break-word;
+        }
+
+        .dresscode-content {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(16px, 3.5vw, 18px);
+            line-height: 1.7;
+        }
+
+        .dresscode-content p {
+            margin-bottom: 20px;
+        }
+
+        .dresscode-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .dresscode-image {
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .dresscode-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 2px solid rgba(88, 101, 242, 0.5);
+            box-shadow: 0 10px 25px -5px black;
+            transition: transform 0.2s;
+        }
+
+        .dresscode-image img:hover {
+            transform: scale(1.02);
+            border-color: #5865F2;
+        }
+
+        .dresscode-image p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 700px) {
+            .dresscode-images {
+                flex-direction: column;
+                align-items: center;
+            }
+            .dresscode-image {
+                max-width: 100%;
+            }
         }
 
         /* ===== ФУТЕР ===== */
@@ -763,12 +838,12 @@
             </div>
             <div class="rules-content">
                 <ul class="promo-list">
-                    <li><strong>Малай → Пацан</strong> <span>Сдать семейный устав Лидеру либо Гл. Заместителям, раскидать 5 раскладок</span></li>
+                    <li><strong>Малай → Пацан</strong> <span>ﾠСдать семейный устав Лидеру либо Гл. Заместителям, раскидать 5 раскладок</span></li>
                     <li><strong>Пацан → Буре</strong> <span>раскидать 10 раскладок. Положить в семейный «общак» : 20.000₽</span></li>
-                    <li><strong>Буре → Торпеда</strong> <span>раскидать 20 раскладок. Присутствовать на одном ограблении. Положить в семейный «общак» : 30.000₽</span></li>
-                    <li><strong>Торпеда → Свояк</strong> <span>раскидать 30 раскладок. Быть на 5 ограблениях. Положить в семейный «общак» : 50.000₽</span></li>
-                    <li><strong>Свояк → Татарин</strong> <span>Присутствовать на 10 ограблениях. Положить в семейный «общак» : 100.000₽</span></li>
-                    <li><strong>Татарин → Абый</strong> <span>На усмотрение Лидера</span></li>
+                    <li><strong>Буре → Торпеда</strong> <span>ﾠраскидать 20 раскладок. Присутствовать на одном ограблении. Положить в семейный «общак» : 30.000₽</span></li>
+                    <li><strong>Торпеда → Свояк</strong> <span>ﾠраскидать 30 раскладок. Быть на 5 ограблениях. Положить в семейный «общак» : 50.000₽</span></li>
+                    <li><strong>Свояк → Татарин</strong> <span>ﾠПрисутствовать на 10 ограблениях. Положить в семейный «общак» : 100.000₽</span></li>
+                    <li><strong>Татарин → Абый</strong> <span>ﾠНа усмотрение Лидера</span></li>
                 </ul>
                 <div class="rules-note">
                     <i class="fas fa-arrow-up" style="margin-right: 10px;"></i> Повышение ступени возможно только после выполнения всех условий текущей.
@@ -780,15 +855,30 @@
         </div>
     </div>
 
-    <!-- Страница: Дресс Код (/dc) - пустая -->
+    <!-- Страница: Дресс Код (/dc) -->
     <div id="page-dresscode" class="page">
-        <div class="placeholder-content">
-            <i class="fas fa-tshirt" style="font-size: 60px; margin-bottom: 20px; opacity: 0.3;"></i>
-            <p>Дресс Код</p>
-            <p style="font-size: 16px; margin-top: 10px;">будет добавлен позже</p>
-        </div>
-        <div class="back-link" style="margin-top: 20px; text-align: center;">
-            <a href="#/"><i class="fas fa-arrow-left"></i> На главную</a>
+        <div class="dresscode-container">
+            <div class="dresscode-header">
+                <h1 class="dresscode-title">ДРЕСС КОД</h1>
+                <div class="rules-subtitle">TATARSTAN FAMILY</div>
+            </div>
+            <div class="dresscode-content">
+                <p><strong style="color: #8a9cff;">Дресс Код:</strong> Наша семья официально зарегистрирована (17.03.2026). После этого события у нас появился обязательный дресс код! Одежда синяя, найти пример можете чуть ниже на картинке. Так-же нужно поменять цвет машины на 1,0,30 - пример тоже ниже!</p>
+                
+                <div class="dresscode-images">
+                    <div class="dresscode-image">
+                        <img src="dresscode.png" alt="Пример одежды (синий цвет)" onerror="this.src='https://via.placeholder.com/400x300/2a2a3a/ffffff?text=Одежда+синяя'; this.style.border='1px solid #5865F2';">
+                        <p>Пример синей одежды</p>
+                    </div>
+                    <div class="dresscode-image">
+                        <img src="dresscodecar.png" alt="Пример цвета машины 1,0,30" onerror="this.src='https://via.placeholder.com/400x300/1a1a2a/8a9cff?text=Цвет+машины+1,0,30'; this.style.border='1px solid #5865F2';">
+                        <p>Цвет машины: 1, 0, 30</p>
+                    </div>
+                </div>
+            </div>
+            <div class="back-link" style="margin-top: 30px;">
+                <a href="#/"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
+            </div>
         </div>
     </div>
 
